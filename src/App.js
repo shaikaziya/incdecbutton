@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import React from "react"
 import './App.css';
+import { commonFunc } from "./actions/index";
+import { useSelector,useDispatch } from "react-redux";
 
 function App() {
+const dispatch=useDispatch()
+const mystate=useSelector((state)=>state.changeNumber)
+
+  const handleClick = (type) => {
+    if(type === 'INC'){
+      dispatch(commonFunc('INC'))
+    } else if(type === 'DEC'){
+      dispatch(commonFunc('DEC'))
+    }
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <button onClick={()=>handleClick('INC')}>Increment</button>
+     <input value={mystate}/>
+     <button  onClick={()=>handleClick('DEC')}>Decrement</button>
+    </>
+   
   );
 }
 
